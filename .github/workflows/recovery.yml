@@ -6,7 +6,7 @@ on:
       RECOVERY_URL:
         description: 'RECOVERY URL'
         required: true
-        default: 'https://filebin.net/vnopc87j7odoafpoi/recovery.img'
+        default: 'https://files.catbox.moe/17m8e6.img'
 
 jobs:
   build:
