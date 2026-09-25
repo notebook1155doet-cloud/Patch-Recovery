@@ -61,29 +61,15 @@ jobs:
 
           echo "=== CREATE USTAR TAR ==="
 
-          python3 - <<'PY'
-import tarfile
+          tar \
+            --format=ustar \
+            --owner=0 \
+            --group=0 \
+            --numeric-owner \
+            -cf fastbootd-recovery.tar \
+            recovery.img
 
-with tarfile.open(
-    "fastbootd-recovery.tar",
-    "w",
-    format=tarfile.USTAR_FORMAT
-) as tar:
-    info = tar.gettarinfo(
-        "recovery.img",
-        arcname="recovery.img"
-    )
-
-    info.uid = 0
-    info.gid = 0
-    info.uname = ""
-    info.gname = ""
-
-    with open("recovery.img", "rb") as f:
-        tar.addfile(info, f)
-PY
-
-          echo "=== VERIFY TAR ==="
+          echo "=== VERIFY TAR CONTENTS ==="
           tar --list --file=fastbootd-recovery.tar
 
           echo "=== VERIFY TAR FORMAT ==="
